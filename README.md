@@ -1,6 +1,6 @@
 # 🧪 Analyse et Ingénierie des Données de la Chlordécone aux Antilles françaises
 
-**ENSAR — École Nationale Supérieure d'Arts et Réseaux, Niort**  
+**ENSAR, Niort**  
 **Parcours A1 Data Science — 2025-2026**  
 **Cours : Ingénierie des données avec Python et RStudio — S. Manou-Abi**
 
