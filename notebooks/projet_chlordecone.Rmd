@@ -36,9 +36,12 @@ library(factoextra)   # ACP, CAH
 library(FactoMineR)   # ACP, AFC
 library(cluster)      # K-means, silhouette
 library(class)        # KNN
+library(moments)      # skewness, kurtosis
+library(gridExtra)    # mise en page multi-graphiques
+library(scales)       # squish pour les couleurs
 
 # Chargement
-df <- read_delim("BaseCLD2026.csv", delim = ";", locale = locale(encoding = "latin1"))
+df <- read_delim("../data/BaseCLD2026.csv", delim = ";", locale = locale(encoding = "latin1"))
 cat("Dimensions :", nrow(df), "×", ncol(df), "\n")
 glimpse(df)
 ```
@@ -280,7 +283,6 @@ p3 <- df %>%
   geom_line(aes(y = med, color = "Médiane"), linetype = "dashed") +
   labs(title = "Évolution temporelle", y = "Taux")
 
-library(gridExtra)
 grid.arrange(p1, p2, p3, ncol = 2)
 ```
 
@@ -364,8 +366,10 @@ fviz_nbclust(clust_data[sample(nrow(clust_data), 5000), ], kmeans,
 ```{r}
 # K-Means k=3
 set.seed(42)
-km <- kmeans(clust_data, centers = 3, nstart = 25)
-fviz_cluster(km, data = clust_data[sample(nrow(clust_data), 3000), ],
+sample_viz <- sample(nrow(clust_data), 3000)
+clust_sample <- clust_data[sample_viz, ]
+km <- kmeans(clust_sample, centers = 3, nstart = 25)
+fviz_cluster(km, data = clust_sample,
              geom = "point", pointsize = 1, alpha = 0.3) +
   labs(title = "Clusters K-Means (k=3)")
 ```
